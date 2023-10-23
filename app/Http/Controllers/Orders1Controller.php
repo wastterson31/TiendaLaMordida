@@ -46,7 +46,8 @@ class OrdersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Orders::get();
+        return view('admin.orders.CreateOrders', ['categories' => $categories, 'product' => null]);
     }
 
     /**
