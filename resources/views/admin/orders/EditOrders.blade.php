@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <form action="{{ route('order.update', $order) }}" method="POST">
                         @method('PUT')
-                        @include('admin.orders.FormCategory')
+                        @include('admin.orders.FormOrder')
 
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-primary" type="submit"> Registrar </button>

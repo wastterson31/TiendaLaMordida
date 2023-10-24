@@ -1,7 +1,6 @@
 @extends('Menu')
 
 @section('start')
-
     <div class="home-bg">
         <section class="home">
             <div class="swiper home-slider">
@@ -35,7 +34,7 @@
         <div class="swiper category-slider">
             <div class="swiper-wrapper">
                 @foreach ($categories as $category)
-                    <a href="{{ route('category', ['id' => $category->id]) }}" class="swiper-slide slide">
+                    <a href="{{ route('categories', ['id' => $category->id]) }}" class="swiper-slide slide">
                         <img src="{{ $category->image }}" alt="{{ $category->name }}">
                         <h3>{{ $category->name }}</h3>
                     </a>

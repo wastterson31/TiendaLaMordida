@@ -38,7 +38,7 @@ Route::get('/StartSection', [IndexController::class, 'ShowSection'])->name('Sect
 
 Route::get('/Nosotros', [IndexController::class, 'ShowNosotros'])->name('Nosotros');
 
-// Route::get('/category/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('category');
+Route::get('/categories/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
 
 Route::get('/UserPedido', [IndexController::class, 'ShowUserPedido'])->name('UserPedido');
 

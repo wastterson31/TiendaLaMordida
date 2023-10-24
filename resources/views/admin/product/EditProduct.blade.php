@@ -16,7 +16,7 @@
                     {{-- enctype="multipart/form-data" lo que hace esta instrucion adjuntar a la peticion del formulario archivo en este caso una imagen (jpg, png) --}}
                     <form action="{{ route('product.update', $product) }}" method="POST" enctype="multipart/form-data">
                         @method('PUT')
-                        @include('admin.product.FormFroduct')
+                        @include('admin.product.FormProduct')
 
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-primary" type="submit"> Registrar </button>

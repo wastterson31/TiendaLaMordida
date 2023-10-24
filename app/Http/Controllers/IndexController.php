@@ -18,7 +18,8 @@ class IndexController extends Controller
 
     public function ShowProductsByCategory($id)
     {
-        $products = Category::find($id)->products;
+        // $products = Category::find($id)->products;
+        $products = Category::find($id);
         $categories = Category::all();
         return view('ProductsView', ['products' => $products, 'categories' => $categories]);
     }

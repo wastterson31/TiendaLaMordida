@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('product.index') }}" method="POST">
-                        @include('admin.product.FormFroduct')
+                        @include('admin.product.FormProduct')
 
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-primary" type="submit"> Registrar </button>
