@@ -43,10 +43,11 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Orders $orders)
+    public function edit(Orders $order)
     {
-        $categories = Orders::get();
-        return view('admin.orders.CreateOrders', ['categories' => $categories, 'orders' => $orders]);
+        //$categories = Orders::get();
+        //dd($order);
+        return view('admin.orders.EditOrders', [/*'categories' => $categories, */'order' => $order]);
     }
 
     /**
@@ -56,18 +57,23 @@ class OrdersController extends Controller
     {
         $request->validate([
             'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
-            //'image' => 'required|integer|',
+            'address' => 'required',
+            'description' => 'required',
+            'amount' => 'required|integer',
+            'price' => 'required|numeric'
         ]);
 
-        $orders->update(
-            [
-                'name' => $request->name,
-                'image' => '',
-                'state' => 'activo'
-            ]
-        );
+        $orders->update([
+            'name' => $request->input('name'),
+            'address' => $request->input('address'),
+            'description' => $request->input('description'),
+            'amount' => $request->input('amount'),
+            'price' => $request->input('price')
+        ]);
+
         return redirect()->route('Orders.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

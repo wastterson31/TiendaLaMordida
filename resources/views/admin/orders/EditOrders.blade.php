@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('Orders.update', $order) }}" method="POST">
-                        @method('put')
+                        @method('PUT')
                         @include('admin.orders.FormCategory')
 
                         <div class="d-flex justify-content-center">
