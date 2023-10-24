@@ -13,7 +13,7 @@
         <div class="offset-3 col-6">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('Orders.update', $order) }}" method="POST">
+                    <form action="{{ route('order.update', $order) }}" method="POST">
                         @method('PUT')
                         @include('admin.orders.FormCategory')
 

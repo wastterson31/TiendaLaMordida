@@ -113,19 +113,19 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
-                            <a href="{{ route('Product.index') }}" class="nav-link active">
+                            <a href="{{ route('product.index') }}" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Productos</p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{ route('Category.index') }}" class="nav-link active">
+                            <a href="{{ route('category.index') }}" class="nav-link active">
                                 <i class="nav-icon fas fa-folder"></i>
                                 <p>Categoría</p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{ route('Orders.index') }}" class="nav-link active">
+                            <a href="{{ route('order.index') }}" class="nav-link active">
                                 <i class="nav-icon fas fa-utensils"></i>
                                 <p>Ordenes</p>
                             </a>

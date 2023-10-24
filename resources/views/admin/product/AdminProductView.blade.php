@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('Product.create') }}" class="btn btn-warning">
+                        <a href="{{ route('product.create') }}" class="btn btn-warning">
                             <i class="fas fa-plus-circle nav-icon"></i>
                         </a>
                     </div>
@@ -49,8 +49,7 @@
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->discount }}</td>
                                         <td>
-                                            <a href="#" class="btn btn-info btn-edit"
-                                                data-product-id="{{ $product->id }}">
+                                            <a href="{{ route('product.edit', $product) }}" class="btn btn-info btn-edit">
                                                 <i class="fas fa-edit nav-icon"></i>
                                             </a>
                                         </td>

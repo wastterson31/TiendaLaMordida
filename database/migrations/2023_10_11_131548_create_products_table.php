@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->float('price');
+            $table->integer('price');
             $table->string('image');
             $table->integer('discount');
             $table->string('state')->nullable(); // Permite valores nulos

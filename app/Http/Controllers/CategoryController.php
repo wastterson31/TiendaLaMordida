@@ -42,7 +42,7 @@ class CategoryController extends Controller
                 'state' => 'activo'
             ]
         );
-        return redirect()->route('Category.index');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -66,8 +66,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $categories = Category::get();
-        return view('admin.category.ModifyCategory', ['categories' => $categories, 'product' => null]);
+        $request->validate([
+            'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
+            //'image' => 'required|integer|',
+        ]);
+
+        Category::create(
+            [
+                'name' => $request->name,
+                'image' => '',
+                'state' => 'activo'
+            ]
+        );
+        return redirect()->route('category.index');
     }
 
     /**

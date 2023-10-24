@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('Category.create') }}" class="btn btn-warning">
+                        <a href="{{ route('category.create') }}" class="btn btn-warning">
                             <i class="fas fa-plus-circle nav-icon"></i>
                         </a>
                     </div>
@@ -41,7 +41,7 @@
                                                 class="img-fluid img-thumbnail" width="100" height="200"></td>
                                         <td>{{ $category->name }}</td>
                                         <td>
-                                            <a href="{{ route('Category.edit', $category) }}" class="btn btn-info btn-edit"
+                                            <a href="{{ route('category.edit', $category) }}" class="btn btn-info btn-edit"
                                                 data-category-id="{{ $category->id }}">
                                                 <i class="fas fa-edit nav-icon"></i>
                                             </a>

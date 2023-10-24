@@ -4,7 +4,7 @@
 <div>
     <label class="form-label" for="name">Nombre:</label>
     <input class="form-control" type="text" name="name" id="name" placeholder="Ingrese el nombre"
-        value="{{ old('name') }}">
+        value="{{ old('name', $category) }}">
     @error('name')
         <div class="text-small text-danger">{{ $message }}</div>
     @enderror

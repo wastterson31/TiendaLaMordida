@@ -1,7 +1,7 @@
 @csrf
 <!-- category -->
 <div>
-    <label class="form-label" for="name">Categoría:</label>
+    <label class="form-label" for="category_id">Categoría:</label>
     <select class="form-control" name="category_id" id="category_id">
         <option value="0" selected>Seleccione una categoría </option>
         <!-- old() función que obtiene el valor anterior en la recarga de un formulario
@@ -10,7 +10,7 @@
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}"
                     @isset($product)
-                        @selected(old('category_id', $product) == $product->category->id)
+                        @selected(old('category_id', $product) == $category->id)
                     @else
                         @selected(old('category_id', $product) == $category->id)
                     @endisset>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations pedidos.
+     * Run the migrations.
      */
     public function up(): void
     {
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('address');
             $table->text('description');
             $table->integer('amount');
-            $table->char('price');
+            $table->integer('price');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

@@ -6,9 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Orders extends Model
+class Order extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        //'product_id',
+        'address',
+        'description',
+        'amount',
+        'price',
+        //'user_id'
+    ];
     //relación uno a varios desde categorías a productos
     public function product(): BelongsTo
     {

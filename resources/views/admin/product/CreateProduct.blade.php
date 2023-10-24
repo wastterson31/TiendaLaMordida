@@ -13,7 +13,7 @@
         <div class="offset-3 col-6">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('Product.index') }}" method="POST">
+                    <form action="{{ route('product.index') }}" method="POST">
                         @include('admin.product.FormFroduct')
 
                         <div class="d-flex justify-content-center">

@@ -13,7 +13,8 @@
         <div class="offset-3 col-6">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('Category.update') }}" method="POST">
+                    <form action="{{ route('category.update', $category) }}" method="POST">
+                        @method('PUT')
                         @include('admin.category.FormCategory')
 
                         <div class="d-flex justify-content-center">

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class OrdersController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = Orders::get();
+        $orders = Order::get();
         return view('admin.orders.AdminOrdersView', ['orders' => $orders]);
     }
 
@@ -35,7 +36,7 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Orders $orders)
+    public function show(Order $order)
     {
         //
     }
@@ -43,42 +44,40 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Orders $order)
+    public function edit(Order $order)
     {
-        //$categories = Orders::get();
-        //dd($order);
-        return view('admin.orders.EditOrders', [/*'categories' => $categories, */'order' => $order]);
+        $products = Product::get();
+        return view('admin.orders.EditOrders', ['order' => $order, 'products' => $products]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, Order $order)
     {
         $request->validate([
-            'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
+            //'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
             'address' => 'required',
             'description' => 'required',
             'amount' => 'required|integer',
             'price' => 'required|numeric'
         ]);
 
-        $orders->update([
-            'name' => $request->input('name'),
+        $order->update([
+            // 'name' => $request->input('name'),
             'address' => $request->input('address'),
             'description' => $request->input('description'),
             'amount' => $request->input('amount'),
             'price' => $request->input('price')
         ]);
 
-        return redirect()->route('Orders.index');
+        return redirect()->route('order.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $orders)
+    public function destroy(Order $order)
     {
         //
     }

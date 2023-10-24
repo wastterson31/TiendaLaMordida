@@ -43,7 +43,7 @@
                                         <td>{{ $order->price }}</td>
                                         <td>{{ $order->user->name }}</td>
                                         <td>
-                                            <a href="{{ route('Orders.edit', $order) }}" class="btn btn-info btn-edit">
+                                            <a href="{{ route('order.edit', $order) }}" class="btn btn-info btn-edit">
                                                 <i class="fas fa-edit nav-icon"></i>
                                             </a>
                                         </td>

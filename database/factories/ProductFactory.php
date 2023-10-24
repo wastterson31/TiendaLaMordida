@@ -22,7 +22,7 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->words(3, true), // Limitar a 3 palabras.
             'description' => $this->faker->text(100), // Limitar a 100 caracteres.
-            'price' => $this->faker->randomFloat(2, 1, 1000),
+            'price' => $this->faker->numberBetween(1, 1000000),
             'image' => $faker->imageUrl(),
             'discount' => $this->faker->randomElement([0, 5, 10]),
             'category_id' => function () {

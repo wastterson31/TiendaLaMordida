@@ -1,11 +1,12 @@
 @csrf
 
-<!-- name -->
+
+<!-- name product -->
 <div>
-    <label class="form-label" for="name">Nombre:</label>
-    <input class="form-control" type="text" name="name" id="name" placeholder="Ingrese el nombre"
-        value="{{ old('name', $orders) }}">
-    @error('name')
+    <label class="form-label" for="product">Nombre:</label>
+    <input class="form-control" type="text" name="product" id="product" disabled readonly
+        placeholder="Ingrese el nombre" value="{{ old('name', $order->product) }}">
+    @error('product')
         <div class="text-small text-danger">{{ $message }}</div>
     @enderror
 </div>
@@ -15,7 +16,7 @@
 <div>
     <label class="form-label" for="address">Direccion:</label>
     <input class="form-control" type="text" name="address" id="address" accept="address" placeholder="Direccion"
-        value="{{ old('address', $orders) }}">
+        value="{{ old('address', $order) }}">
     @error('address')
         <div class="text-small text-danger">{{ $message }}</div>
     @enderror
@@ -25,7 +26,7 @@
 <div>
     <label class="form-label" for="description">Descripcion:</label>
     <input class="form-control" type="text" name="description" id="description" accept="description"
-        placeholder="Ingrese la descripcion" value="{{ old('description', $orders) }}">
+        placeholder="Ingrese la descripcion" value="{{ old('description', $order) }}">
     @error('description')
         <div class="text-small text-danger">{{ $message }}</div>
     @enderror
@@ -35,7 +36,7 @@
 <div>
     <label class="form-label" for="amount">Cantidad:</label>
     <input class="form-control" type="number" name="amount" id="amount" accept="amount"
-        placeholder="Ingrese la cantidad" value="{{ old('amount', $orders) }}">
+        placeholder="Ingrese la cantidad" value="{{ old('amount', $order) }}">
     @error('amount')
         <div class="text-small text-danger">{{ $message }}</div>
     @enderror
@@ -45,8 +46,18 @@
 <div>
     <label class="form-label" for="price">Precio:</label>
     <input class="form-control" type="number" name="price" id="price" accept="price"
-        placeholder="Ingrese el precio" value="{{ old('price', $orders) }}">
+        placeholder="Ingrese el precio" value="{{ old('price', $order) }}">
     @error('price')
+        <div class="text-small text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- name -->
+<div>
+    <label class="form-label" for="name">Nombre:</label>
+    <input class="form-control" type="text" name="name" id="name" disabled readonly
+        placeholder="Ingrese el nombre" value="{{ old('name', $order->user) }}">
+    @error('name')
         <div class="text-small text-danger">{{ $message }}</div>
     @enderror
 </div>
