@@ -1,12 +1,6 @@
 <?php
 
-use App\Models\User;
-use App\Models\Product;
-use App\Models\Category;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
@@ -42,7 +36,7 @@ Route::get('/categories/{id}', [IndexController::class, 'ShowProductsByCategory'
 
 Route::get('/UserPedido', [IndexController::class, 'ShowUserPedido'])->name('UserPedido');
 
-
+//Route::get('/welcome', [AdminController::class, 'welcome'])->name('welcomeAdmin')->middleware('auth');
 
 //rutas admin
 
@@ -81,19 +75,19 @@ Route::post('/register', [RegisterUserController::class, 'store'])->name('save')
 
 
 
-Route::post('Login', function () {
-    $validar = request()->only('username', 'password');
-    $offers = Product::where('discount', '>', 0)->get();
-    $categories = Category::all();
-    if (Auth::attempt($validar)) {
-        return view('Index', ['offers' => $offers, 'categories' => $categories]);
-    }
-    return view('UserLoginView');
-    return view('Index');
-})->name('Login');
+// Route::post('Login', function () {
+//     $validar = request()->only('username', 'password');
+//     $offers = Product::where('discount', '>', 0)->get();
+//     $categories = Category::all();
+//     if (Auth::attempt($validar)) {
+//         return view('Index', ['offers' => $offers, 'categories' => $categories]);
+//     }
+//     return view('UserLoginView');
+//     return view('Index');
+// })->name('Login');
 
 
-Route::get('/Logout', function () {
-    Auth::logout(); // Cierra la sesión del usuario
-    return redirect('/'); // Redirige al usuario a la página de inicio o a donde desees
-})->name('Logout');
+// Route::get('/Logout', function () {
+//     Auth::logout(); // Cierra la sesión del usuario
+//     return redirect('/'); // Redirige al usuario a la página de inicio o a donde desees
+// })->name('Logout');

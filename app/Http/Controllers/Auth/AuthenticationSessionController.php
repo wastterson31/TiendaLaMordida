@@ -11,28 +11,29 @@ class AuthenticationSessionController extends Controller
 {
     public function create()
     {
-        return view('auth.Login');
+        return view('UserLoginView');
     }
 
     public function store(Request $request)
     {
         $credentials = $request->validate(
             [
-                'email' => 'required|string|email|max:255|min:8',
+                'username' => 'required',
                 'password' => 'required|string'
             ]
         );
+        //dd($credentials);
 
         //Incorrecto, genera excepción y retorna al formulario de login
         if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages(
                 [
-                    'email' => 'Autenticación incorrecta'
+                    'username' => 'Autenticación incorrecta'
                 ]
             );
         }
         $request->session()->regenerate();
-        return redirect()->route('welcomeAdmin');
+        return redirect()->route('Admin');
     }
 
     public function destroy(Request $request)

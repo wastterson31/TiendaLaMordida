@@ -1,30 +1,58 @@
 @extends('Menu')
 
 @section('start')
+    <!DOCTYPE html>
+    <html lang="en">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - La Mordida</title>
-</head>
-<body>
-    <section class="form-container">
-        <form action="" method="post">
-            <h3>Register</h3>
-            <input type="text" name="full_name" required placeholder="Nombre completo" maxlength="50" class="box">
-            <input type="text" name="neighborhood" required placeholder="Barrio donde Vive" maxlength="50" class="box">
-            <input type="number" name="phone_number" required placeholder="Numero telefonico" maxlength="20" class="box">
-            <input type="text" name="username" required placeholder="Usuario" maxlength="20" class= "box " >
-            <input type="password" name="password" required placeholder="Contraseña" maxlength="20" class="box">
-            <input type="password" name="confirm_password" required placeholder="Confirmar contraseña" maxlength="20" class="box">
-            <input type="submit" value="Crear cuenta" class="btn" name="submit">
-            <p>¿Ya tienes una cuenta?</p>
-            <a href="{{ route('Section') }}" class="option-btn" style="text-decoration: none">Iniciar seccion</a>
-        </form>
-    </section>
-</body>
-</html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro - La Mordida</title>
+    </head>
 
+    <body>
+        <section class="form-container">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <h3>Registro</h3>
+                <input type="text" name="name" required placeholder="Nombre completo" maxlength="255" class="box">
+                @error('name')
+                    <div class="text-small text-danger">{{ $message }}</div>
+                @enderror
+
+                <input type="text" name="address" required placeholder="Barrio" class="box">
+                @error('address')
+                    <div class="text-small text-danger">{{ $message }}</div>
+                @enderror
+
+                <input type="text" name="phone" required placeholder="Número de teléfono" class="box">
+                @error('phone')
+                    <div class="text-small text-danger">{{ $message }}</div>
+                @enderror
+
+                <input type="text" name="username" required placeholder="Nombre de usuario" class="box">
+                @error('username')
+                    <div class="text-small text-danger">{{ $message }}</div>
+                @enderror
+
+                <input type="password" name="password" required placeholder="Contraseña" maxlength="20" class="box">
+                @error('password')
+                    <div class="text-small text-danger">{{ $message }}</div>
+                @enderror
+
+                <input type="password" name="password_confirmation" required placeholder="Confirma tu contraseña"
+                    maxlength="20" class="box">
+                @error('password_confirmation')
+                    <div class="text-small text-danger">{{ $message }}</div>
+                @enderror
+
+                <button type="submit" class="btn" name="submit">Registrarse</button>
+                <p>¿Ya tienes una cuenta?</p>
+                <a href="{{ route('login') }}" class="option-btn">Iniciar sesión</a>
+            </form>
+        </section>
+    </body>
+
+    </html>
 @endsection

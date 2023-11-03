@@ -16,17 +16,17 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-{
-    return [
-        'name' => $this->faker->name,
-        'address' => $this->faker->address,
-        'phone' => $this->faker->numberBetween(100000000, 999999999), // Genera un número de teléfono aleatorio de 9 dígitos dentro del rango válido.
-        'username' => $this->faker->userName,
-        'password' => bcrypt('password123'), // Asegúrate de usar contraseñas seguras en un entorno real.
-        'rol' => $this->faker->randomElement(['admin', 'user']), // Rol aleatorio.
-        'remember_token' => Str::random(10), // Genera un token de recuerdo aleatorio.
-    ];
-}
+    {
+        return [
+            'name' => $this->faker->name,
+            'address' => $this->faker->address,
+            'phone' => $this->faker->numberBetween(100000000, 999999999), // Genera un número de teléfono aleatorio de 9 dígitos dentro del rango válido.
+            'username' => $this->faker->userName,
+            'password' => bcrypt('password123'), // Asegúrate de usar contraseñas seguras en un entorno real.
+            'rol' => $this->faker->randomElement(['admin', 'user']), // Rol aleatorio.
+            'remember_token' => Str::random(10), // Genera un token de recuerdo aleatorio.
+        ];
+    }
 
 
     /**

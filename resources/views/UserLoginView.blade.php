@@ -15,10 +15,11 @@
         <section class="form-container">
             <form method="POST" action="{{ route('start') }}">
                 @csrf
+
                 <h3>Inicia Sesión</h3>
-                <input type="text" name="email" required placeholder="Usuario" maxlength="50" class="box">
+                <input type="text" name="username" required placeholder="Usuario" maxlength="50" class="box">
                 <input type="password" name="password" required placeholder="Contraseña" maxlength="20" class="box">
-                <input type="submit" value="Iniciar Sesión" class="btn" name="submit">
+                <button type="submit" class="btn" name="submit">Iniciar Sesión</button>
                 <p>¿No tienes una cuenta?</p>
                 <a href="{{ route('Register') }}" class="option-btn">Crea tu cuenta</a>
             </form>

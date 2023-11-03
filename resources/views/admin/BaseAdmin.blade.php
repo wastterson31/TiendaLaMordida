@@ -131,16 +131,19 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href=""
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="nav-link" style="color: #FF5733;">
-                                <i class="nav-icon fas fa-sign-out-alt" style="color: #FF5733;"></i>
-                                <p>Cerrar Sesión</p>
-                            </a>
-                            <form id="logout-form" action="" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                            <div class="dropdown-item">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <button type="submit" class="btn btn-link text-danger">
+                                            <i class="fas fa-sign-out-alt mr-2"></i> Salir
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </li>
+
+
 
                     </ul>
                 </nav>
