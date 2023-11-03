@@ -30,6 +30,8 @@ Route::get('/Register', [IndexController::class, 'ShowRegister'])->name('Registe
 
 Route::get('/StartSection', [IndexController::class, 'ShowSection'])->name('Section');
 
+Route::get('/StartSectionAdmin', [IndexController::class, 'ShowSectionAdmin'])->name('SectionAmin');
+
 Route::get('/Nosotros', [IndexController::class, 'ShowNosotros'])->name('Nosotros');
 
 Route::get('/categories/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
@@ -58,6 +60,12 @@ Route::resource('order', OrderController::class);
 Route::get('/login', [AuthenticationSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticationSessionController::class, 'store'])->name('start');
 Route::post('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
+
+
+
+
+
+//Route::get('/login', [AuthenticationSessionController::class, 'administrador'])->name('login');
 
 Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisterUserController::class, 'store'])->name('save');

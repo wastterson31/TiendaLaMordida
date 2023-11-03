@@ -44,7 +44,10 @@ class IndexController extends Controller
     {
         return view('UserLoginView');
     }
-
+    public function ShowSectionAdmin()
+    {
+        return view('admin.auth.Login');
+    }
     public function ShowNOSOTROS()
     {
         return view('Nosotros');

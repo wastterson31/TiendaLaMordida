@@ -32,14 +32,13 @@
             </a>
             <nav class="navbar">
                 <a href="{{ route('Products') }}" style="text-decoration: none">Productos</a>
-                <a href="{{ route('Admin') }}" style="text-decoration: none">Admin</a>
                 @guest
                     <a href="{{ route('Register') }}" style="text-decoration: none">Registrarse</a>
                     <a href="{{ route('Section') }}" style="text-decoration: none">Iniciar Sesión</a>
 
                 @endguest
                 @auth
-                <a href="{{ route('UserPedido') }}" style="text-decoration: none">Pedidos</a>
+                    <a href="{{ route('UserPedido') }}" style="text-decoration: none">Pedidos</a>
                     <div class="icons">
                         <div id="user-btn" class="fas fa-user">
 
