@@ -6,19 +6,14 @@
         <!-- Botón de desplegable -->
         <div class="col-12 d-flex justify-content-center">
             <div class="mb-3">
-                <label for="category_id" class="form-label">Seleciona una categoria</label>
+                <label for="category_id" class="form-label">Selecciona una categoría</label>
                 <select class="form-select form-select-lg" name="category_id" id="category_id">
                     <option value="0" selected>Todas</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
-
                 </select>
             </div>
-        </div>
-
-
-
         </div>
         <div class="all-products">
             @foreach ($products as $producto)
@@ -28,12 +23,15 @@
                         <h4 class="product-title">{{ $producto->name }}</h4>
                         <p class="product-price">Precio: {{ $producto->price }}</p>
                         <input type="hidden" name="producto" id="producto" value="{{ $producto->id }}">
-
                         @if (auth()->check())
-                            <!-- Verificar si el usuario está autenticado -->
                             <a class="product-btn" href="#" data-product="{{ $producto->id }}">Comprar</a>
                         @else
-                            <a class="product-btn" href="{{ route('Section') }}"> comprar</a>
+                            @guest
+                                <a class="product-btn" href="{{ route('Session') }}">Comprar</a>
+                            @endguest
+                            @auth
+                                <a class="btn btn-secondary" href="{{ route('Session') }}">Comprar</a>
+                            @endauth
                         @endif
                     </div>
                 </div>
@@ -52,34 +50,51 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <form id="pedidoForm">
                         <div class="form-group">
-                            <label for="cantidad">Cantidad:</label>
-                            <input type="number" class="form-control" id="cantidad" name="cantidad" required>
-                        </div>
-                        <div class ="form-group">
-                            <label for="direccion">Dirección de Entrega:</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" required>
+                            <label for="amount">Cantidad:</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="form-group">
-                            <label for="descripcion">Descripción:</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                            <label for="address">Dirección de Entrega:</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción:</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+
+                        </div>
+                        {{-- <input type="hidden" disabled readonly name="hidden" value=""> --}}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" id="confirmarPedido">Confirmar Pedido</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="confirmarPedido">Confirmar Pedido</button>
-                </div>
+
             </div>
         </div>
     </div>
+
     <script type="text/javascript">
-        var select = document.getElementById('category_id'); //optener el objeto del formulario
-        select.addEventListener('change', function() {
-            var selectOption = this.options[select.selectedIndex];
-            //alert(selectOption.value + " - " + selectOption.text);
-            window.location.href = "/category/" + selectOption.value;
-        })
+        document.addEventListener('DOMContentLoaded', function() {
+            var comprarButtons = document.querySelectorAll('.product-btn');
+
+            comprarButtons.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita la redirección del enlace
+
+                    var productId = this.getAttribute('data-product');
+                    openPedidoModal(productId);
+                });
+            });
+
+            function openPedidoModal(productId) {
+                var modal = new bootstrap.Modal(document.getElementById('pedidoModal'));
+                modal.show();
+                // Aquí puedes realizar cualquier otra acción que necesites al abrir el modal.
+            }
+        });
     </script>
 @endsection

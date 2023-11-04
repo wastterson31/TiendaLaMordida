@@ -25,6 +25,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->numberBetween(1, 1000000),
             'image' => $faker->imageUrl(),
             'discount' => $this->faker->randomElement([0, 5, 10]),
+            'delete' => $this->faker->randomElement([true, false]),
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },

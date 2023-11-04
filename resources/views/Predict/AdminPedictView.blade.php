@@ -8,16 +8,16 @@
 @endsection
 
 @section('title')
-    categorias
+    Productos
 @endsection
 
 @section('content')
     <div class="row">
-        <div class="offset-3 col-6">
+        <div class="col">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('category.create') }}" class="btn btn-warning">
+                        <a href="{{ route('product.create') }}" class="btn btn-warning">
                             <i class="fas fa-plus-circle nav-icon"></i>
                         </a>
                     </div>
@@ -28,21 +28,29 @@
                         <thead>
                             <tr>
                                 <th>Imagen</th>
+                                <th>Categoria</th>
                                 <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                                <th>Descuento</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @isset($categories)
-                                @foreach ($categories as $category)
+                            @isset($products)
+                                @foreach ($products as $product)
                                     <tr>
-                                        <td><img src="{{ $category->image }}" alt="{{ $category->name }}"
+
+                                        <td><img src="{{ $product->image }}" alt="{{ $product->name }}"
                                                 class="img-fluid img-thumbnail" width="100" height="200"></td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->description }}</td>
+                                        <td>{{ $product->price }}</td>
+                                        <td>{{ $product->discount }}</td>
                                         <td>
-                                            <a href="{{ route('category.edit', $category) }}" class="btn btn-info btn-edit"
-                                                data-category-id="{{ $category->id }}">
+                                            <a href="" class="btn btn-info btn-edit">
                                                 <i class="fas fa-edit nav-icon"></i>
                                             </a>
                                         </td>
@@ -52,8 +60,7 @@
                                                     <i class="fas fa-minus-circle nav-icon"></i>
                                                 </a>
                                             </form> --}}
-                                            <button class="btn btn-danger"
-                                                onclick=" window.location.href = '/categories/{{ $category->id }}'">
+                                            <button class="btn btn-danger">
                                                 <i class="fas fa-minus-circle nav-icon"></i>
                                             </button>
                                         </td>

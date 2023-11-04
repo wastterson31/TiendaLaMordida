@@ -33,6 +33,13 @@ class IndexController extends Controller
         return view('ProductsView', ['products' => $products, 'offers' => $offers, 'categories' => $categories]);
     }
 
+    public function ShowPredict()
+    {
+        return view('user.UserPedido');
+    }
+
+
+
 
 
     public function ShowRegister()
@@ -40,11 +47,11 @@ class IndexController extends Controller
         return view('UserRegisterView');
     }
 
-    public function ShowSection()
+    public function ShowSession()
     {
         return view('UserLoginView');
     }
-    public function ShowSectionAdmin()
+    public function ShowSessionAdmin()
     {
         return view('admin.auth.Login');
     }

@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
+        $categories = Category::where('delete', '=', false)->get();
         return view('admin.category.AdminCategoryView', ['categories' => $categories]);
     }
 
@@ -87,5 +87,16 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+    public function setStateDeleteCategory($id)
+    {
+        //dd($id);
+        $category = Category::find($id);
+        $category->update(
+            [
+                'delete' => true
+            ]
+        );
+        return redirect()->route('category.index');
     }
 }

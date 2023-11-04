@@ -7,16 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations Categorias.
+     * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('pedicts', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('image');
-            $table->char('state');
-            $table->boolean('delete');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('pedicts');
     }
 };

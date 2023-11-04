@@ -22,6 +22,7 @@ class CategoryFactory extends Factory
             'name' => $this->faker->word, // Genera una palabra aleatoria.
             'image' => $faker->imageUrl(), // Genera una URL de imagen falsa.
             'state' => $this->faker->randomElement(['activo', 'inactivo']), // Estado activo o inactivo de manera aleatoria.
+            'delete' => $this->faker->randomElement([true, false]),
         ];
     }
 }

@@ -15,6 +15,7 @@ class Order extends Model
         'description',
         'amount',
         'price',
+        'delete'
         //'user_id'
     ];
     //relación uno a varios desde categorías a productos

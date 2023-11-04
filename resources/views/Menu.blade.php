@@ -32,12 +32,14 @@
             </a>
             <nav class="navbar">
                 <a href="{{ route('Products') }}" style="text-decoration: none">Productos</a>
+
                 @guest
                     <a href="{{ route('Register') }}" style="text-decoration: none">Registrarse</a>
-                    <a href="{{ route('Section') }}" style="text-decoration: none">Iniciar Sesión</a>
+                    <a href="{{ route('Session') }}" style="text-decoration: none">Iniciar Sesión</a>
 
                 @endguest
                 @auth
+                    {{-- <a href="{{ route('Pedidos') }}" style="text-decoration: none">Pedidos</a> --}}
                     <a href="{{ route('UserPedido') }}" style="text-decoration: none">Pedidos</a>
                     <div class="icons">
                         <div id="user-btn" class="fas fa-user">
@@ -48,7 +50,7 @@
                         </div>
                     </div>
                     <div class="flex-btn">
-                        <a href="{{ route('Logout') }}" style="text-decoration: none" class="option-btn">Cerrar Sesión</a>
+                        <a href="{{ route('logout') }}" style="text-decoration: none" class="option-btn">Cerrar Sesión</a>
                     </div>
                 @endauth
             </nav>

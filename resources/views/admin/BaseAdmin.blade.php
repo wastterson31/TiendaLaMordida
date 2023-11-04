@@ -123,6 +123,12 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
+                            <a href="{{ route('predict.index') }}" class="nav-link active">
+                                <i class="nav-icon fas fa-folder"></i>
+                                <p>Pedidos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
                             <div class="dropdown-item">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf

@@ -41,6 +41,7 @@
                             @isset($products)
                                 @foreach ($products as $product)
                                     <tr>
+
                                         <td><img src="{{ $product->image }}" alt="{{ $product->name }}"
                                                 class="img-fluid img-thumbnail" width="100" height="200"></td>
                                         <td>{{ $product->category->name }}</td>
@@ -54,11 +55,15 @@
                                             </a>
                                         </td>
                                         <td class="text-center">
-                                            <form action="">
+                                            {{-- <form action="">
                                                 <a href="" class="btn btn-danger">
                                                     <i class="fas fa-minus-circle nav-icon"></i>
                                                 </a>
-                                            </form>
+                                            </form> --}}
+                                            <button class="btn btn-danger"
+                                                onclick=" window.location.href = '/products/{{ $product->id }}'">
+                                                <i class="fas fa-minus-circle nav-icon"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         //$categories = Category::all();
-        $products = Product::get();
+        $products = Product::where('delete', '=', false)->get();
         return view('admin.product.AdminProductView', ['products' => $products]);
     }
 
@@ -62,6 +62,11 @@ class ProductController extends Controller
             //'image' => 'required|integer|',
             'discount' => 'required|integer|'
         ]);
+
+        // opener el nombre de la imagen usando la función del tiempo para generar un nombre aleatorio
+        $imageName = time() . '.' . $request->image->extension();
+        //copiar la imagen al directorio publico hay que crear las carpetas  storage/pets/
+        $request->image->move(public_path('storage/product'), $imageName);
 
         Product::create(
             [
@@ -150,5 +155,18 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function setStateDelete($id)
+    {
+        //dd($id);
+        $product = Product::find($id);
+        $product->update(
+            [
+                // 'delete' => !$product->delete
+                'delete' => true
+            ]
+        );
+        return redirect()->route('product.index');
     }
 }

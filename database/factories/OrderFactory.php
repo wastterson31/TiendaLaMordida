@@ -23,6 +23,7 @@ class OrderFactory extends Factory
             'amount' => $this->faker->numberBetween(1, 10), // Ajusta el rango según tus necesidades.
             'price' => $this->faker->numberBetween(1, 1000000), // Precio aleatorio con 2 decimales.
             'user_id' => $this->faker->numberBetween(1, 10), // Ajusta el rango según tus usuarios.
+            'delete' => $this->faker->randomElement([true, false]),
         ];
     }
 }

@@ -12,7 +12,8 @@ class Category extends Model
     protected $fillable = [
         'name',
         'image',
-        'state'
+        'state',
+        'delete'
     ];
     //de uno a uno
     public function products(): HasMany

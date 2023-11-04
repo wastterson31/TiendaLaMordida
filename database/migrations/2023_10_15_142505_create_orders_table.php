@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('amount');
             $table->integer('price');
+            $table->boolean('delete');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

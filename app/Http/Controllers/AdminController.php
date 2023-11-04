@@ -17,6 +17,7 @@ class AdminController extends Controller
     {
 
         $products = Category::find($id)->products;
+
         $categories = Category::all();
         return view('admin.product.AdminProductView', ['products' => $products, 'categories' => $categories]);
     }

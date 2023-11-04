@@ -13,7 +13,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::get();
+        $orders = Order::where('delete', '=', false)->get();
         return view('admin.orders.AdminOrdersView', ['orders' => $orders]);
     }
 
@@ -80,5 +80,17 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+    public function setStateDelete($id)
+    {
+        //dd($id);
+        $order = Order::find($id);
+        $order->update(
+            [
+                // 'delete' => !$order->delete
+                'delete' => true
+            ]
+        );
+        return redirect()->route('order.index');
     }
 }

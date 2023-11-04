@@ -48,11 +48,15 @@
                                             </a>
                                         </td>
                                         <td class="text-center">
-                                            <form action="">
+                                            {{-- <form action="">
                                                 <a href="" class="btn btn-danger">
                                                     <i class="fas fa-minus-circle nav-icon"></i>
                                                 </a>
-                                            </form>
+                                            </form> --}}
+                                            <button class="btn btn-danger"
+                                                onclick=" window.location.href = '/orders/{{ $order->id }}'">
+                                                <i class="fas fa-minus-circle nav-icon"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

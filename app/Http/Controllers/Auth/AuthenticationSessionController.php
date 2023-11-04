@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -32,8 +33,14 @@ class AuthenticationSessionController extends Controller
                 ]
             );
         }
+        $user = User::where('username', $request->username)->get()[0];
+
         $request->session()->regenerate();
-        return redirect()->route('Admin');
+        if ($user->rol == 'admin') {
+            return redirect()->route('Admin');
+        } else {
+            return redirect()->route('Home');
+        }
     }
 
     public function destroy(Request $request)
