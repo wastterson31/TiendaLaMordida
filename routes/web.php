@@ -38,7 +38,7 @@ Route::get('/StartSessionAdmin', [IndexController::class, 'ShowSessionAdmin'])->
 // rutas de sesión
 Route::get('/login', [AuthenticationSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticationSessionController::class, 'store'])->name('start');
-Route::post('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
+Route::get('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
 //Route::get('/login', [AuthenticationSessionController::class, 'administrador'])->name('login');
 
 // registro de compradores
@@ -61,6 +61,22 @@ Route::resource('predict', PredictController::class);
 Route::get('/products/{id}', [ProductController::class, 'setStateDelete'])->name('setDelete');
 Route::get('/categories/{id}', [CategoryController::class, 'setStateDeleteCategory'])->name('setDelete');
 Route::get('/orders/{id}', [OrderController::class, 'setStateDelete'])->name('setDelete');
+
+//RUTAS ZONA ADMINISTRATIVA-ADMINISTRADOR===============================================================
+Route::post('/buy', [OrderController::class, 'store'])->name('buy');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Route::get('/welcome', [AdminController::class, 'welcome'])->name('welcomeAdmin')->middleware('auth');

@@ -27,7 +27,7 @@
                             <a class="product-btn" href="#" data-product="{{ $producto->id }}">Comprar</a>
                         @else
                             @guest
-                                <a class="product-btn" href="{{ route('Session') }}">Comprar</a>
+                                <a class="btn" href="{{ route('Session') }}">Comprara</a>
                             @endguest
                             @auth
                                 <a class="btn btn-secondary" href="{{ route('Session') }}">Comprar</a>
@@ -51,7 +51,13 @@
                 </div>
                 <div class="modal-body">
 
-                    <form id="pedidoForm">
+                    <form id="pedidoForm" method="POST" action="{{ route('buy') }}">
+                        @csrf
+                        {{-- Optinen los datos de manera oculta --}}
+                        <input type="hidden" name="product_id" id="product_id" value="{{ $producto->id }}">
+                        <input type="hidden" name="price" id="price" value="{{ $producto->price }}">
+                        <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
+
                         <div class="form-group">
                             <label for="amount">Cantidad:</label>
                             <input type="number" class="form-control" id="amount" name="amount" required>
@@ -86,11 +92,17 @@
                     event.preventDefault(); // Evita la redirección del enlace
 
                     var productId = this.getAttribute('data-product');
-                    openPedidoModal(productId);
+                    updateProductInForm(productId);
+                    openPedidoModal();
                 });
             });
 
-            function openPedidoModal(productId) {
+            function updateProductInForm(productId) {
+                // Actualiza el valor del campo product_id en el formulario
+                document.getElementById('product_id').value = productId;
+            }
+
+            function openPedidoModal() {
                 var modal = new bootstrap.Modal(document.getElementById('pedidoModal'));
                 modal.show();
                 // Aquí puedes realizar cualquier otra acción que necesites al abrir el modal.

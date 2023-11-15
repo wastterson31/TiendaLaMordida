@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -30,7 +31,33 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        // Cargar los productos y categorías necesarios para la vista
+        $products = Product::get();
+        $categories = Category::get(); // Ajusta esto según la estructura de tu modelo Category
+
+        // Valida y procesa los datos del formulario
+        $request->validate([
+            'amount' => 'required|integer',
+            'address' => 'required|string',
+            'description' => 'nullable|string',
+            'price' => 'required|integer',
+            'product_id' => 'required|integer', // validación para product_id
+        ]);
+
+        // Almacena la información del pedido en la base de datos
+        Order::create([
+            'product_id' => $request->input('product_id'),
+            'address' => $request->input('address'),
+            'description' => $request->input('description'),
+            'amount' => $request->input('amount'),
+            'price' => $request->input('price'),
+            'user_id' => $request->input('user_id'),
+            'delete' => false,
+        ]);
+
+        // Retornar la vista con las variables necesarias
+        return view('ProductsView', ['categories' => $categories, 'products' => $products]);
     }
 
     /**
