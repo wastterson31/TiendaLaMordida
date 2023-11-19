@@ -61,7 +61,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'image' => $imageName, // Guardar el nombre de la imagen en la base de datos
             'discount' => $request->discount,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'delete' => false
         ]);
 
         // Redireccionar a la ruta de índice de productos
