@@ -32,18 +32,26 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
-            //'image' => 'required|integer|',
+            'image' => 'image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        Category::create(
-            [
-                'name' => $request->name,
-                'image' => '',
-                'state' => 'activo'
-            ]
-        );
+        // Manejar la carga y almacenamiento de la imagen
+        $imageName = $request->file('image')->store('category_images', 'public');
+
+        $imageName = time() . '.' . $request->image->extension();
+        //copiar la imagen al directorio publico hay que crear las carpetas  storage/pets/
+        $request->image->move(public_path('public'), $imageName);
+
+        Category::create([
+            'name' => $request->name,
+            'image' => $imageName,
+            'state' => 'activo',
+            'delete' => false, // Agrega esto para evitar el error de no nulo
+        ]);
+
         return redirect()->route('category.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -68,18 +76,28 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
-            //'image' => 'required|integer|',
+            'image' => 'image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        Category::create(
-            [
-                'name' => $request->name,
-                'image' => '',
-                'state' => 'activo'
-            ]
-        );
+        // Inicializa el array de datos de categoría
+        $categoryData = [
+            'name' => $request->name,
+            'state' => 'activo',
+        ];
+
+        // Procesar la imagen solo si se proporciona una nueva
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('public/'), $imageName);
+            $categoryData['image'] = $imageName;
+        }
+
+        // Actualiza los datos de la categoría
+        $category->update($categoryData);
+
         return redirect()->route('category.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -24,6 +24,7 @@
     @enderror
 </div>
 <!-- name -->
+@csrf
 <div>
     <label class="form-label" for="name">Nombre:</label>
     <input class="form-control" type="text" name="name" id="name" placeholder="Ingrese el nombre"

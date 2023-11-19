@@ -123,9 +123,9 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="{{ route('predict.index') }}" class="nav-link active">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-folder"></i>
-                                <p>Pedidos</p>
+                                <p>Grafico</p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">

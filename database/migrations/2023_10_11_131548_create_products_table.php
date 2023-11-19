@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('image');
             $table->integer('discount');
-            $table->boolean('delete');
+            $table->boolean('delete')->default(false);
             $table->string('state')->nullable(); // Permite valores nulos
             $table->timestamps();
         });

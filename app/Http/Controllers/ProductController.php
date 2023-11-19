@@ -36,49 +36,36 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Agrega registros de depuración para verificar los datos del formulario
-        //dd($request->all()); // Verifica si los datos del formulario se están pasando correctamente
-
-
-        // Crea un nuevo objeto Producto y almacena los datos del formulario
-        //$product = new Product();
-        // $product->name = $request->input('name');
-        // $product->description = $request->input('description');
-        // $product->price = $request->input('price');
-        // $product->image = $request->input('image');
-        // $product->discount = $request->input('discount');
-        // $product->category_id = $request->input('category_id');
-
-        // // Guarda el producto en la base de datos
-        // $product->save();
-
-        // // Redirection a una página de éxito o a donde desees
-        // return view('admin.AdminPetView')->with('success', 'Producto creado con éxito');
-
         $request->validate([
             'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
             'description' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,50',
             'price' => 'required',
-            //'image' => 'required|integer|',
-            'discount' => 'required|integer|'
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:2048', // Validación de imagen
+            'discount' => 'required|integer',
+            'category_id' => 'required'
         ]);
 
-        // opener el nombre de la imagen usando la función del tiempo para generar un nombre aleatorio
-        $imageName = time() . '.' . $request->image->extension();
-        //copiar la imagen al directorio publico hay que crear las carpetas  storage/pets/
-        $request->image->move(public_path('storage/product'), $imageName);
+        // Obtener la extensión del archivo de imagen
+        $extension = $request->image->extension();
 
-        Product::create(
-            [
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
-                'image' => '',
-                'discount' => $request->discount,
-                'category_id' => $request->category_id
-            ]
-        );
-        return redirect()->route('Product.index');
+        // Construir el nombre único para la imagen
+        $imageName = time() . '.' . $extension;
+
+        // Mover la imagen al directorio de almacenamiento
+        $request->image->move(public_path('public'), $imageName);
+
+        // Crear el producto en la base de datos
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $imageName, // Guardar el nombre de la imagen en la base de datos
+            'discount' => $request->discount,
+            'category_id' => $request->category_id
+        ]);
+
+        // Redireccionar a la ruta de índice de productos
+        return redirect()->route('product.index');
     }
 
 
@@ -108,43 +95,32 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
-        // Actualizar los datos del producto con los valores del formulario
-        // $product->name = $request->input('name');
-        // $product->description = $request->input('description');
-        // $product->price = $request->input('price');
-        // $product->discount = $request->input('discount');
-        // $product->category_id = $request->input('category_id');
-
-        // // Guardar los cambios en la base de datos
-        // $product->save();
-
-        // // Redirection a la vista de detalles del producto actualizado o a donde desees
-        // return redirect()->route('AdminPetView', $product->id)->with('success', 'Producto actualizado con éxito');
-
         $request->validate([
             'name' => 'required|regex:/^([A-Za-zÑñ\s]*)$/|between:3,100',
             'description' => 'required',
             'price' => 'required|min:1|max:1000000',
-            //'image' => 'required|integer|',
-            'discount' => 'required|integer'
+            'image' => 'image|mimes:jpg,png,jpeg|max:2048',
+            'discount' => 'required|integer',
+            'category_id' => 'required'
         ]);
 
-        $product->update(
-            [
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
-                // 'image' => '',
-                'discount' => $request->discount,
-                'category_id' => $request->category_id
-            ]
-        );
-        // Si se proporciona una nueva imagen, actualizarla
+        $productData = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'category_id' => $request->category_id
+        ];
+
+        // Procesar la imagen solo si se proporciona una nueva
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path(), $imageName);
-            $product->update(['image' => $imageName]);
+            $request->image->move(public_path('public/'), $imageName);
+            $productData['image'] = $imageName;
         }
+
+        $product->update($productData);
+
         return redirect()->route('product.index');
     }
 

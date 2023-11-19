@@ -27,7 +27,7 @@
         <div class="all-products">
             @foreach ($products as $producto)
                 <div class="product">
-                    <img src="{{ asset($producto->image) }}" alt="{{ $producto->name }}">
+                    <img src="{{ asset('public/' . $producto->image) }}" alt="{{ $producto->name }}">
                     <div class="product-info">
                         <h4 class="product-title">{{ $producto->name }}</h4>
                         <p class="product-price">Precio: {{ $producto->price }}</p>

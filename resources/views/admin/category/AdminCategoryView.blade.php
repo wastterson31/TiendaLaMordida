@@ -37,7 +37,7 @@
                             @isset($categories)
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <td><img src="{{ $category->image }}" alt="{{ $category->name }}"
+                                        <td><img src="{{ 'public/' . $category->image }}" alt="{{ $category->name }}"
                                                 class="img-fluid img-thumbnail" width="100" height="200"></td>
                                         <td>{{ $category->name }}</td>
                                         <td>

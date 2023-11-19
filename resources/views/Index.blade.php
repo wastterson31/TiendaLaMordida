@@ -9,7 +9,7 @@
                     @foreach ($offers as $offer)
                         <div class="swiper-slide slide">
                             <div class="image">
-                                <img src="{{ $offer->image }}" alt="Nombre de la imagen">
+                                <img src="{{ 'public/' . $offer->image }}" alt="Nombre de la imagen">
                             </div>
                             <div class="content">
                                 <span>{{ $offer->description }}</span>
@@ -35,7 +35,7 @@
             <div class="swiper-wrapper">
                 @foreach ($categories as $category)
                     <a href="{{ route('categories', ['id' => $category->id]) }}" class="swiper-slide slide">
-                        <img src="{{ $category->image }}" alt="{{ $category->name }}">
+                        <img src="{{ 'public/' . $category->image }}" alt="{{ $category->name }}">
                         <h3>{{ $category->name }}</h3>
                     </a>
                 @endforeach

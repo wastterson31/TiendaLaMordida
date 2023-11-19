@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Auth\AuthenticationSessionController;
 use App\Http\Controllers\PredictController;
+use Illuminate\Redis\Connectors\PredisConnector;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,10 @@ Route::get('/orders/{id}', [OrderController::class, 'setStateDelete'])->name('se
 
 //RUTAS ZONA ADMINISTRATIVA-ADMINISTRADOR===============================================================
 Route::post('/buy', [OrderController::class, 'store'])->name('buy');
+
+
+//rutas de usuario
+Route::get('/ordenes/{id}', [PredictController::class, 'setStateDeletes'])->name('setDeletes');
 
 
 
