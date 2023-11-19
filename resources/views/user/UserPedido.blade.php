@@ -20,17 +20,22 @@
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <!-- Botón de Cancelar Pedido con confirmación -->
-                                <button class="btn btn-danger" style="padding: 6px 3px;">Cancelar</button>
-                            </td>
+                        @isset($orders)
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $order->product->name }}</td>
+                                    <td>{{ $order->address }}</td>
+                                    <td>{{ $order->description }}</td>
+                                    <td>{{ $order->amount }}</td>
+                                    <td>{{ $order->price }}</td>
+                                    <td>{{ $order->user->name }}</td>
+                                    <td>
 
-                        </tr>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        @endisset
 
                     </tbody>
                 </table>

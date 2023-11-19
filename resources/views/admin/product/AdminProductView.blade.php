@@ -55,11 +55,11 @@
                                             </a>
                                         </td>
                                         <td class="text-center">
-                                            {{-- <form action="">
+                                            {{-- {{- action="">
                                                 <a href="" class="btn btn-danger">
                                                     <i class="fas fa-minus-circle nav-icon"></i>
                                                 </a>
-                                            </form> --}}
+                                        > --}}
                                             <button class="btn btn-danger"
                                                 onclick=" window.location.href = '/products/{{ $product->id }}'">
                                                 <i class="fas fa-minus-circle nav-icon"></i>
@@ -99,7 +99,7 @@
                 "autoWidth": true,
                 "language": {
                     "lengthMenu": "Mostrar " +
-                        `<select class="custom-select custom-select-sm form-control form-control-sm">
+                        `<select class="custom-select custom-select--contr-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>

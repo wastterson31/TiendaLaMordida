@@ -31,6 +31,7 @@ Route::get('/categories-public/{id}', [IndexController::class, 'ShowProductsByCa
 Route::get('/Products', [IndexController::class, 'ShowProducts'])->name('Products');
 Route::get('/Register', [IndexController::class, 'ShowRegister'])->name('Register');
 
+Route::get('/Products/categories/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
 
 Route::get('/StartSession', [IndexController::class, 'ShowSession'])->name('Session');
 Route::get('/StartSessionAdmin', [IndexController::class, 'ShowSessionAdmin'])->name('SessionAdmin');
@@ -39,6 +40,7 @@ Route::get('/StartSessionAdmin', [IndexController::class, 'ShowSessionAdmin'])->
 Route::get('/login', [AuthenticationSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticationSessionController::class, 'store'])->name('start');
 Route::get('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
+Route::post('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
 //Route::get('/login', [AuthenticationSessionController::class, 'administrador'])->name('login');
 
 // registro de compradores

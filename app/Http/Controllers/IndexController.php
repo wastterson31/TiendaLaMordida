@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -18,10 +19,17 @@ class IndexController extends Controller
 
     public function ShowProductsByCategory($id)
     {
-        // $products = Category::find($id)->products;
-        $products = Category::find($id);
         $categories = Category::all();
-        return view('ProductsView', ['products' => $products, 'categories' => $categories]);
+        if ($id != '0') {
+            $products = Category::find($id)->products;
+            // $products = Category::find($id);
+            // $products = Product::where('category_id', '=', $category->id);
+            // dd($category, $products);
+            return view('ProductsView', ['products' => $products, 'categories' => $categories, 'category_id' => $id]);
+        } else {
+            $products = Product::get();
+            return view('ProductsView', ['products' => $products, 'categories' => $categories, 'category_id' => $id]);
+        }
     }
 
     public function ShowProducts()
@@ -62,7 +70,11 @@ class IndexController extends Controller
 
     public function  ShowUserPedido()
     {
-        return view('user/UserPedido');
+        //dd(auth()->user()->username);
+        //where('state', true)->where('category_id', $category->id)->get();
+        //$orders = Order::where('delete', '=', false, 'and', 'user_id', '=', auth()->user()->id)->get();
+        $orders = Order::where('delete', false)->where('user_id', auth()->user()->id)->get();
+        return view('user.UserPedido', ['orders' => $orders]);
     }
 
     public function ShowAdmin()

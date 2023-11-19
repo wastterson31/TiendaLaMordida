@@ -9,16 +9,25 @@
                 <label for="category_id" class="form-label">Selecciona una categoría</label>
                 <select class="form-select form-select-lg" name="category_id" id="category_id">
                     <option value="0" selected>Todas</option>
-                    @foreach ($categories as $category)
+                    {{-- @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
+                    @endforeach --}}
+                    @isset($categories)
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                @isset($category_id)
+                                    @selected($category_id == $category->id)
+                                @endisset>
+                                {{ $category->name }}</option>
+                        @endforeach
+                    @endisset
                 </select>
             </div>
         </div>
         <div class="all-products">
             @foreach ($products as $producto)
                 <div class="product">
-                    <img src="{{ $producto->image }}" alt="{{ $producto->name }}">
+                    <img src="{{ asset($producto->image) }}" alt="{{ $producto->name }}">
                     <div class="product-info">
                         <h4 class="product-title">{{ $producto->name }}</h4>
                         <p class="product-price">Precio: {{ $producto->price }}</p>
@@ -39,49 +48,59 @@
         </div>
     </section>
 
-    <!-- Modal para ingresar información del pedido -->
-    <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pedidoModalLabel">Información del Pedido</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    {{-- @guest
+    @endguest --}}
+    @auth
+        <!-- Modal para ingresar información del pedido -->
+        <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pedidoModalLabel">Información del Pedido</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form id="pedidoForm" method="POST" action="{{ route('buy') }}">
+                            @csrf
+                            {{-- Optinen los datos de manera oculta --}}
+                            <input type="hidden" name="product_id" id="product_id" value="{{ $producto->id }}">
+                            <input type="hidden" name="price" id="price" value="{{ $producto->price }}">
+                            @if (auth()->check())
+                                <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
+                            @else
+                                @guest
+
+                                @endguest
+                            @endif
+                            <div class="form-group">
+                                <label for="amount">Cantidad:</label>
+                                <input type="number" class="form-control" id="amount" name="amount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Dirección de Entrega:</label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Descripción:</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+
+                            </div>
+                            {{-- <input type="hidden" disabled readonly name="hidden" value=""> --}}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" id="confirmarPedido">Confirmar
+                                    Pedido</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
-                <div class="modal-body">
-
-                    <form id="pedidoForm" method="POST" action="{{ route('buy') }}">
-                        @csrf
-                        {{-- Optinen los datos de manera oculta --}}
-                        <input type="hidden" name="product_id" id="product_id" value="{{ $producto->id }}">
-                        <input type="hidden" name="price" id="price" value="{{ $producto->price }}">
-                        <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
-
-                        <div class="form-group">
-                            <label for="amount">Cantidad:</label>
-                            <input type="number" class="form-control" id="amount" name="amount" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="address">Dirección de Entrega:</label>
-                            <input type="text" class="form-control" id="address" name="address" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Descripción:</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-
-                        </div>
-                        {{-- <input type="hidden" disabled readonly name="hidden" value=""> --}}
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary" id="confirmarPedido">Confirmar Pedido</button>
-                        </div>
-                    </form>
-                </div>
-
             </div>
         </div>
-    </div>
+    @endauth
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
@@ -107,6 +126,12 @@
                 modal.show();
                 // Aquí puedes realizar cualquier otra acción que necesites al abrir el modal.
             }
+
+            var category = document.getElementById('category_id');
+            category.addEventListener('change', function() {
+                var selectOption = this.options[category.selectedIndex];
+                window.location.href = "/Products/categories/" + selectOption.value;
+            });
         });
     </script>
 @endsection

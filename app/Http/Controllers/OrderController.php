@@ -17,7 +17,6 @@ class OrderController extends Controller
         $orders = Order::where('delete', '=', false)->get();
         return view('admin.orders.AdminOrdersView', ['orders' => $orders]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
