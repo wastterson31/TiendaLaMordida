@@ -65,7 +65,7 @@ class ProductController extends Controller
             'delete' => false
         ]);
 
-        // Redireccionar a la ruta de índice de productos
+        // Redirection a la ruta de índice de productos
         return redirect()->route('product.index');
     }
 

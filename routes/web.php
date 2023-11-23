@@ -72,6 +72,8 @@ Route::post('/buy', [OrderController::class, 'store'])->name('buy');
 //rutas de usuario
 Route::get('/ordenes/{id}', [PredictController::class, 'setStateDeletes'])->name('setDeletes');
 
+//dashboard
+Route::get('/dashboard', [PredictController::class, 'viwDashboard'])->name('dashboard');
 
 
 

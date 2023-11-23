@@ -29,6 +29,13 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/styles.css') }}">
+    {{-- dasbor --}}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <link rel="stylesheet" href="{{ asset('css/dasboar.css') }}">
     @yield('styles')
 </head>
 
@@ -123,7 +130,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ asset('dashboard') }}" class="nav-link active">
                                 <i class="nav-icon fas fa-folder"></i>
                                 <p>Grafico</p>
                             </a>
