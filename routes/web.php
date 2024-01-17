@@ -25,55 +25,55 @@ use Illuminate\Redis\Connectors\PredisConnector;
 
 
 
-//RUTAS ZONA PUBLICA =======================================================================0
-Route::get('/', [IndexController::class, 'ShowHome'])->name('Home');
-Route::get('/Nosotros', [IndexController::class, 'ShowNosotros'])->name('Nosotros');
-Route::get('/categories-public/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
-Route::get('/Products', [IndexController::class, 'ShowProducts'])->name('Products');
-Route::get('/Register', [IndexController::class, 'ShowRegister'])->name('Register');
+// //RUTAS ZONA PUBLICA =======================================================================0
+// Route::get('/', [IndexController::class, 'ShowHome'])->name('Home');
+// Route::get('/Nosotros', [IndexController::class, 'ShowNosotros'])->name('Nosotros');
+// Route::get('/categories-public/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
+// Route::get('/Products', [IndexController::class, 'ShowProducts'])->name('Products');
+// Route::get('/Register', [IndexController::class, 'ShowRegister'])->name('Register');
 
-Route::get('/Products/categories/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
+// Route::get('/Products/categories/{id}', [IndexController::class, 'ShowProductsByCategory'])->name('categories');
 
-Route::get('/StartSession', [IndexController::class, 'ShowSession'])->name('Session');
-Route::get('/StartSessionAdmin', [IndexController::class, 'ShowSessionAdmin'])->name('SessionAdmin');
+// Route::get('/StartSession', [IndexController::class, 'ShowSession'])->name('Session');
+// Route::get('/StartSessionAdmin', [IndexController::class, 'ShowSessionAdmin'])->name('SessionAdmin');
 
-// rutas de sesión
-Route::get('/login', [AuthenticationSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticationSessionController::class, 'store'])->name('start');
-Route::get('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
-Route::post('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
-//Route::get('/login', [AuthenticationSessionController::class, 'administrador'])->name('login');
+// // rutas de sesión
+// Route::get('/login', [AuthenticationSessionController::class, 'create'])->name('login');
+// Route::post('/login', [AuthenticationSessionController::class, 'store'])->name('start');
+// Route::get('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
+// Route::post('/logout', [AuthenticationSessionController::class, 'destroy'])->name('logout');
+// //Route::get('/login', [AuthenticationSessionController::class, 'administrador'])->name('login');
 
-// registro de compradores
-Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisterUserController::class, 'store'])->name('save');
+// // registro de compradores
+// Route::get('/register', [RegisterUserController::class, 'create'])->name('register');
+// Route::post('/register', [RegisterUserController::class, 'store'])->name('save');
 
-//RUTAS ZONA ADMINISTRATIVA-COMPRADOR==================================================================
-Route::get('/UserPedido', [IndexController::class, 'ShowUserPedido'])->name('UserPedido');
-//Route::get('/Predict', [IndexController::class, 'ShowPredict'])->name('Pedidos');
-
-
-//RUTAS ZONA ADMINISTRATIVA-ADMINISTRADOR===============================================================
-Route::get('/welcome', [AdminController::class, 'ShowAdmin'])->name('Admin');
-
-Route::resource('product', ProductController::class);
-Route::resource('category', CategoryController::class);
-Route::resource('order', OrderController::class);
-Route::resource('predict', PredictController::class);
-//eliminar
-Route::get('/products/{id}', [ProductController::class, 'setStateDelete'])->name('setDelete');
-Route::get('/categories/{id}', [CategoryController::class, 'setStateDeleteCategory'])->name('setDelete');
-Route::get('/orders/{id}', [OrderController::class, 'setStateDelete'])->name('setDelete');
-
-//RUTAS ZONA ADMINISTRATIVA-ADMINISTRADOR===============================================================
-Route::post('/buy', [OrderController::class, 'store'])->name('buy');
+// //RUTAS ZONA ADMINISTRATIVA-COMPRADOR==================================================================
+// Route::get('/UserPedido', [IndexController::class, 'ShowUserPedido'])->name('UserPedido');
+// //Route::get('/Predict', [IndexController::class, 'ShowPredict'])->name('Pedidos');
 
 
-//rutas de usuario
-Route::get('/ordenes/{id}', [PredictController::class, 'setStateDeletes'])->name('setDeletes');
+// //RUTAS ZONA ADMINISTRATIVA-ADMINISTRADOR===============================================================
+// Route::get('/welcome', [AdminController::class, 'ShowAdmin'])->name('Admin');
 
-//dashboard
-Route::get('/dashboard', [PredictController::class, 'viwDashboard'])->name('dashboard');
+// Route::resource('product', ProductController::class);
+// Route::resource('category', CategoryController::class);
+// Route::resource('order', OrderController::class);
+// Route::resource('predict', PredictController::class);
+// //eliminar
+// Route::get('/products/{id}', [ProductController::class, 'setStateDelete'])->name('setDelete');
+// Route::get('/categories/{id}', [CategoryController::class, 'setStateDeleteCategory'])->name('setDelete');
+// Route::get('/orders/{id}', [OrderController::class, 'setStateDelete'])->name('setDelete');
+
+// //RUTAS ZONA ADMINISTRATIVA-ADMINISTRADOR===============================================================
+// Route::post('/buy', [OrderController::class, 'store'])->name('buy');
+
+
+// //rutas de usuario
+// Route::get('/ordenes/{id}', [PredictController::class, 'setStateDeletes'])->name('setDeletes');
+
+// //dashboard
+// Route::get('/dashboard', [PredictController::class, 'viwDashboard'])->name('dashboard');
 
 
 

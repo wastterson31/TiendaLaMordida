@@ -11,10 +11,14 @@ class IndexController extends Controller
 {
     public function ShowHome()
     {
+        //dd($offers);
+        // $offers = Product::where('discount', '>', 0)->get();
+        // $categories = Category::all();
+        //$products = Product::all(); // Obtén los productos que deseas mostrar en la vista.
         $offers = Product::where('discount', '>', 0)->get();
         $categories = Category::all();
-        //$products = Product::all(); // Obtén los productos que deseas mostrar en la vista.
-        return view('Index', ['offers' => $offers, 'categories' => $categories]);
+        $products = Product::all(); // Obtén los productos que deseas mostrar en la vista.
+        return view('Index', ['offers' => $offers, 'categories' => $categories, 'products' => $products]);
     }
 
     public function ShowProductsByCategory($id)
@@ -22,6 +26,7 @@ class IndexController extends Controller
         $categories = Category::all();
         if ($id != '0') {
             $products = Category::find($id)->products;
+            dd($products);
             // $products = Category::find($id);
             // $products = Product::where('category_id', '=', $category->id);
             // dd($category, $products);
